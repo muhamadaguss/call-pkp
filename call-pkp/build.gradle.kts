@@ -1,3 +1,18 @@
+buildscript {
+    var kotlin_version: String by extra
+    kotlin_version = "1.7.20"
+
+    repositories {
+        google()
+        mavenCentral()
+        mavenLocal()            // << --- ADD This
+    }
+
+    dependencies {
+        classpath ("com.android.tools.build:gradle:7.1.3")
+        classpath ("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+    }
+}
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -23,14 +38,15 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            consumerProguardFiles("consumer-rules.pro")
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "11"
     }
 }
 
@@ -53,4 +69,24 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+
+            groupId = "com.github.muhamadaguss"
+            artifactId = "call-pkp"
+            version = "1.0"
+
+            pom {
+                description.set("Library For Call PKP")
+            }
+        }
+    }
+
+    repositories {
+        // Publish to the local Maven repository
+        mavenLocal()
+    }
 }

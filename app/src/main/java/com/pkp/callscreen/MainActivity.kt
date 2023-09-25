@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.endCallButton).setOnClickListener {
-//            callApi.hangup()
+            callApi.hangup()
             findViewById<Button>(R.id.call).isEnabled = true
             findViewById<Button>(R.id.pause).isEnabled = false
             findViewById<Button>(R.id.hang_up).isEnabled = false

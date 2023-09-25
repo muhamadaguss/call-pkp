@@ -1,7 +1,7 @@
 jdk:
-  - openjdk17
+  - openjdk11
 before_install:
   - ./scripts/prepareJitpackEnvironment.sh
 install:
   - FILE="-Dfile=call-pkp-release.aar"
-  - mvn install:install-file $FILE -DgroupId=com.github.muhamadaguss -DartifactId=callscreen -Dversion=1.0 -Dpackaging=aar -DgeneratePom=true
+  - mvn install:install-file $FILE -DgroupId=com.github.muhamadaguss -DartifactId=callscreen -Dversion=1.0.2 -Dpackaging=aar -DgeneratePom=true
